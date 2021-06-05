@@ -6,4 +6,9 @@
         android:icon="@drawable/autorenew"
         android:title="Refresh"
         app:showAsAction="ifRoom"></item>
+    <item
+        android:id="@+id/info"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="Refresh"
+        app:showAsAction="ifRoom"></item>
 </menu>

@@ -184,6 +184,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //petición al servidor para descargar de nuevo los sitios
                 obtenerEstaciones();
                 break;
+            case R.id.info:
+                Intent intentoinfo= new Intent(MainActivity.this, MainActivityInfo.class);
+                startActivity(intentoinfo);
+                break;
         }
         return true;
     }
