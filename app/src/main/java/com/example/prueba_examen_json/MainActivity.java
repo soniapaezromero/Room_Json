@@ -44,10 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public String id;
     public static List<Estacion> estacionesExistentes;
     private ActivityMainBinding binding;
-    private EstacionRepositorio repositorio;
-    private Estacion estacionActualizada;
     private EstacionAdapter adapter;
-    private RecyclerView recyclerView;
     private MainViewModel mainViewModel;
     public  List<Estacion> estacionList;
     public static int ADDESTACIONREQUEST =1;
