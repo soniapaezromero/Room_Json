@@ -30,24 +30,28 @@ public class Result {
     @Expose
     private String lastUpdated;
 
+    @SerializedName("geometry")
+    @Expose
+    private Geometry geometry;
+
     /**
      * No args constructor for use in serialization
-     * 
+     *
      */
     public Result() {
     }
 
     /**
-     * 
-     * @param lastUpdated
+     *
      * @param estado
      * @param address
+     * @param geometry
      * @param id
      * @param title
      * @param anclajesDisponibles
      * @param bicisDisponibles
      */
-    public Result(String id, String title, String estado, String address, Integer bicisDisponibles, Integer anclajesDisponibles, String lastUpdated) {
+    public Result(String id, String title, String estado, String address, Integer bicisDisponibles, Integer anclajesDisponibles, Geometry geometry) {
         super();
         this.id = id;
         this.title = title;
@@ -55,7 +59,7 @@ public class Result {
         this.address = address;
         this.bicisDisponibles = bicisDisponibles;
         this.anclajesDisponibles = anclajesDisponibles;
-        this.lastUpdated = lastUpdated;
+        this.geometry = geometry;
     }
 
     public String getId() {
@@ -144,9 +148,30 @@ public class Result {
         this.lastUpdated = lastUpdated;
     }
 
-    public Result withLastUpdated(String lastUpdated) {
-        this.lastUpdated = lastUpdated;
+    public Geometry getGeometry() {
+        return geometry;
+    }
+
+    public void setGeometry(Geometry geometry) {
+        this.geometry = geometry;
+    }
+
+    public Result withGeometry(Geometry geometry) {
+        this.geometry = geometry;
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Result{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", estado='" + estado + '\'' +
+                ", address='" + address + '\'' +
+                ", bicisDisponibles=" + bicisDisponibles +
+                ", anclajesDisponibles=" + anclajesDisponibles +
+                ", lastUpdated='" + lastUpdated + '\'' +
+                ", geometry=" + geometry +
+                '}';
+    }
 }

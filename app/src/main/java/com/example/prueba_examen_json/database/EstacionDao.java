@@ -25,11 +25,11 @@ public abstract interface EstacionDao {
     @Query("SELECT * FROM estaciones WHERE id LIKE :idestacion")
     LiveData <Estacion> getEstacion(Integer idestacion);
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)//Inerta datos en la tabla
+    @Insert(onConflict = OnConflictStrategy.IGNORE)//Inerta datos de la tabla
     void addEstacion(Estacion estacion);
 
     @Delete
-    void deleteEstacion(Estacion estacion);// Borra un registro de la tabal
+    void deleteEstacion(Estacion estacion);// Borra un registro de la tabla
 
     @Update
     void updateEstacion(Estacion estacion);// Actualiza el registro

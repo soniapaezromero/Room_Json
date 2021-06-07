@@ -1,7 +1,7 @@
 package com.example.prueba_examen_json.database;
 /**
- * @author:Sonia Päez Creado el:25/04/2021
- * Crea la tabla reservas que es la encargada de registrar los paseos
+ * @author:Sonia Päez
+ * Crea la entidad
  */
 
 import androidx.annotation.NonNull;
@@ -25,29 +25,36 @@ public class Estacion {
     private Integer anclajesDisponibles;
     @ColumnInfo(name = "lastUpdated")
     private String lastUpdated;
+    @ColumnInfo(name = "longitud")
+    private String longitud;
+    @ColumnInfo(name = "latitud")
+    private String latitud;
 
     public Estacion(Integer id) {
         this.id = id;
     }
-    public Estacion(){
+
+    public Estacion() {
 
     }
 
-    public Estacion(String nombre, String estado, String address, Integer bicisDisponibles,Integer anclajesDisponibles,String lastUpdated) {
+    public Estacion(String nombre, String estado, String address, Integer bicisDisponibles, Integer anclajesDisponibles, String lastUpdated, String longitud, String latitud) {
         this.nombre = nombre;
         this.estado = estado;
         this.address = address;
         this.bicisDisponibles = bicisDisponibles;
-        this.anclajesDisponibles=anclajesDisponibles;
-        this.lastUpdated=lastUpdated;
+        this.anclajesDisponibles = anclajesDisponibles;
+        this.lastUpdated = lastUpdated;
+        this.longitud = longitud;
+        this.latitud = latitud;
     }
 
     @NonNull
-    public Integer  getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(@NonNull Integer  id) {
+    public void setId(@NonNull Integer id) {
         this.id = id;
     }
 
@@ -57,7 +64,7 @@ public class Estacion {
         return nombre;
     }
 
-    public void setNombre( String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
@@ -101,6 +108,22 @@ public class Estacion {
         this.lastUpdated = lastUpdated;
     }
 
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
     @Override
     public String toString() {
         return "Estacion{" +
@@ -111,6 +134,8 @@ public class Estacion {
                 ", bicisDisponibles=" + bicisDisponibles +
                 ", anclajesDisponibles=" + anclajesDisponibles +
                 ", lastUpdated='" + lastUpdated + '\'' +
+                ", longitud='" + longitud + '\'' +
+                ", latitud='" + latitud + '\'' +
                 '}';
     }
 }

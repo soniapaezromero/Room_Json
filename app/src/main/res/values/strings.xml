@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Prueba_Examen_Json</string>
+    <string name="corchete">\"[ \"</string>
 </resources>

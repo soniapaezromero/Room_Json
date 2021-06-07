@@ -3,6 +3,8 @@ package com.example.prueba_examen_json.networks;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -23,9 +25,10 @@ public class ApiAdapter {
             //HtppLoggingInterceptor nos muestra en terminal los fallos que se puedadn producir en el OKHTTp y el documento descargado
             HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build();
+            OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).readTimeout(60, TimeUnit.SECONDS)
+                    .connectTimeout(60, TimeUnit.SECONDS).build();
 
-            // CRreamos documento
+            // Creamos documento
             Gson gson = new GsonBuilder().create();
             // Creamos el retrofit y nos descargamos el docuemento
             Retrofit retrofit = new Retrofit.Builder()

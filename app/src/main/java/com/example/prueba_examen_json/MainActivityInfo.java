@@ -50,7 +50,7 @@ public class MainActivityInfo extends AppCompatActivity implements View.OnClickL
 
         });
         infoBinding.recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, infoBinding.recyclerView, new RecyclerTouchListener.ClickListener() {
-            //Click Corto modifica la Reserva
+            //Click Corto  muestra la información
             @Override
             public void onClick(View view, int position) {
                 Estacion estacionSeleccionada= estacionList.get(position);
@@ -77,19 +77,21 @@ public class MainActivityInfo extends AppCompatActivity implements View.OnClickL
                         .create();
                 alertDialog.show();
             }
-            //Click largo elimina la Reserva
+            //Click largo abrimos map
             @Override
             public void onLongClick(View view, int position) {
-                final Estacion estacionEliminar= estacionList.get(position);;
+                Estacion estacionElegida= estacionList.get(position);;
 
                 AlertDialog dialog1 = new AlertDialog
                         .Builder(MainActivityInfo.this)
-                        .setPositiveButton("Sí, eliminar", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Sí, ubicar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mainViewModel.Delete(estacionEliminar);
-
-                                Toast.makeText(MainActivityInfo.this, "Estacion eliminada", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(MainActivityInfo.this, MapsActivity.class);
+                                intent.putExtra("direccion",estacionElegida.getAddress());
+                                intent.putExtra("latitud",estacionElegida.getLatitud());
+                                intent.putExtra("longitud",estacionElegida.getLongitud());
+                                startActivity(intent);
 
                             }
                         })
@@ -100,7 +102,7 @@ public class MainActivityInfo extends AppCompatActivity implements View.OnClickL
                             }
                         })
                         .setTitle("Confirmar")
-                        .setMessage("¿Eliminar la estacion" + estacionEliminar.getNombre() + "?")
+                        .setMessage("¿Quieres que te  muestre en el mapa la estacion: " +estacionElegida.getNombre() + "?")
                         .create();
                 dialog1.show();
 

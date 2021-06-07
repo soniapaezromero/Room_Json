@@ -32,6 +32,8 @@ import com.example.prueba_examen_json.networks.ApiAdapter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         binding.recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, binding.recyclerView, new RecyclerTouchListener.ClickListener() {
-            //Click Corto modifica la Reserva
+            //Click Corto modifica
             @Override
             public void onClick(View view, int position) {
                 Estacion estacionEditada= estacionList.get(position);
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .create();
                 alertDialog.show();
             }
-            //Click largo elimina la Reserva
+            //Click largo elimina
             @Override
             public void onLongClick(View view, int position) {
                 final Estacion estacionEliminar= estacionList.get(position);;
@@ -207,17 +209,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         for (Result r : resultados) {
                             Estacion estacionInsertada = new Estacion();
                             estacionInsertada.setNombre(r.getTitle());
-                            Log.e("insertamos",r.getTitle());
                             estacionInsertada.setEstado(r.getEstado());
-                            Log.e("insertamos",r.getEstado());
                             estacionInsertada.setAddress(r.getAddress());
-                            Log.e("insertamos",r.getAddress());
                             estacionInsertada.setBicisDisponibles(r.getBicisDisponibles());
-                            Log.e("insertamos",r.getBicisDisponibles().toString());
                             estacionInsertada.setAnclajesDisponibles(r.getAnclajesDisponibles());
-                            Log.e("insertamos",r.getAnclajesDisponibles().toString());;
                             estacionInsertada.setLastUpdated(r.getLastUpdated());
-                            Log.e("insertamos",r.getLastUpdated());
+                            String coordenadas= r.getGeometry().getCoordinates().toString();
+                            Pattern p = Pattern.compile("\\[(.*?)\\]");
+                            Matcher m = p.matcher(coordenadas);
+                            m.find();
+                            String coordenasLimpias= m.group(1);
+                            String[]partes=coordenasLimpias.split(",");
+                            String longitud= partes[0];
+                            String  latitud= partes[1];
+                            estacionInsertada.setLongitud(longitud);
+                            estacionInsertada.setLatitud(latitud);
                             List<Estacion>estacionesGuardadas= getEstacionList();
                             if(estacionesGuardadas.size() <=1 ){
                                 mainViewModel.Insert(estacionInsertada);
@@ -225,9 +231,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Log.e("COMPARAR ESTACION","entra");
                                 if (!Existe(estacionInsertada)) {
                                     mainViewModel.Insert(estacionInsertada);
-                                }else{
-                                  //  mostrarError("Esta estacion ya existe");
                                 }
+
                             }
                         }
 
@@ -238,7 +243,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFailure(Call<EstacionesBici> call, Throwable t) {     //si falllara el OKHTTp te inforam de fallo
-                Log.e("Fallo", t.getLocalizedMessage());
 
                 mostrarError("Fallos: "+ t.getLocalizedMessage());
             }
@@ -275,7 +279,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //Resibimos datos de la Clase ADD Reserva
+        //Resibimos datos de la Clase ADD
         if (requestCode == ADDESTACIONREQUEST && resultCode == RESULT_OK) {// Si sale bien el intent recogemos los datos
             String nombre = data.getStringExtra(AddEstacion.EXTRA_ADDNOMBRE);
             String estado = data.getStringExtra(AddEstacion.EXTRA_ADDESTADO);
@@ -336,6 +340,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         }
+
+    /**
+     * Metodo para comparar si esxiste ya el registro
+     * @param estacion
+     * @return
+     */
 
     public boolean Existe(Estacion estacion){
         List <Estacion> estacionLista= new ArrayList<>();

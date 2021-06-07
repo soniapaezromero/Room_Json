@@ -9,7 +9,7 @@ import com.example.prueba_examen_json.databinding.ActivityMostrarEstacionBinding
 
 /**
  * @author :Sonia Páez Romero
- * Activity que nos muestra los datos de las estaciones
+ * Activity que nos muestra los datos
  */
 public class MostrarEstacion extends AppCompatActivity {
   private ActivityMostrarEstacionBinding bindingMostrar;

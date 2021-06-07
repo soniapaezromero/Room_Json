@@ -24,23 +24,23 @@ public class EstacionRepositorio {
 
 
     }
-
+    // Obtiene todos los registros
     public  LiveData<List<Estacion>> getEstaciones() {
          return allEstaciones;
     }
-
+    // Obtiene un registro determinado
     public LiveData<Estacion> getEstacion(Integer id) {
         return estacionDao.getEstacion(id);
     }
-
+    // Añade Registro
     public void addEstacion(Estacion estacion) {
         new InsertAsynctask(estacionDao).execute(estacion);
     }
-
+    //actualiza registro
     public void updateEstacion(Estacion estacion) {
         new UpdateAsynctask(estacionDao).execute(estacion);
     }
-
+    //borra registro
     public void deleteEstacion(Estacion estacion) {
         new DeleteAsynctask(estacionDao).execute(estacion);
         ;

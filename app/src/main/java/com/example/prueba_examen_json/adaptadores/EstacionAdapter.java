@@ -1,7 +1,7 @@
 package com.example.prueba_examen_json.adaptadores;
 /**
  * @author:Sonia Päez Creado el:25/04/2021
- * Adaptador del REcycler view que nos muestr nombre del jinete,FEcha y hora
+ * Adaptador del RecyclerView
  */
 import android.content.Context;
 import android.os.Build;
