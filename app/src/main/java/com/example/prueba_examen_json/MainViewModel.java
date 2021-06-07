@@ -1,6 +1,6 @@
 package com.example.prueba_examen_json;
 /**
- * @author:Sonia Päez Creado el:25/04/2021
+ * @author:Sonia Päez
  * Clase View Model que se encarga de conectar la activida principal con le calse repositoio de la base de datos
  */
 
@@ -22,13 +22,15 @@ public class MainViewModel extends AndroidViewModel {
         todasEstaciones = repositorio.getEstaciones();
 
     }
-
+    //Insertamos registro
     public void Insert(Estacion estacion){// Inserta
         repositorio.addEstacion(estacion);
     }
+    //Actualizamos registro
     public void Update(Estacion estacion){// Modifica la vbase de datos
         repositorio.updateEstacion(estacion);
     }
+    //Borra un  registro
     public void Delete(Estacion estacion){// Borra registro
         repositorio.deleteEstacion(estacion);
     }

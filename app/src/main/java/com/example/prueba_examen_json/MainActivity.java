@@ -162,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        //Añade Registro
         if(v== binding.fab){
             Intent intento = new Intent(MainActivity.this, AddEstacion.class);
             startActivityForResult(intento, ADDESTACIONREQUEST);
@@ -225,7 +226,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             if(estacionesGuardadas.size() <=1 ){
                                 mainViewModel.Insert(estacionInsertada);
                             }else {
-                                Log.e("COMPARAR ESTACION","entra");
                                 if (!Existe(estacionInsertada)) {
                                     mainViewModel.Insert(estacionInsertada);
                                 }
